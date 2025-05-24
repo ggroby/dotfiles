@@ -19,5 +19,6 @@
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = [
     pkgs.lua-language-server
+    pkgs.wgsl-analyzer
   ];
 }
