@@ -1,5 +1,6 @@
 {
   pkgs,
+  unstable-pkgs,
   nixvim-package,
   ...
 }: {
@@ -13,12 +14,13 @@
     cargo-leptos
     nixvim-package
     tracy
+    wgsl-analyzer
     godot_4
   ];
 
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = [
     pkgs.lua-language-server
-    pkgs.wgsl-analyzer
+    unstable-pkgs.wgsl-analyzer
   ];
 }
