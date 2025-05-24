@@ -14,7 +14,6 @@
     cargo-leptos
     nixvim-package
     tracy
-    wgsl-analyzer
     godot_4
   ];
 
