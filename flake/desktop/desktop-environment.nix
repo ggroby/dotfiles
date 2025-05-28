@@ -12,6 +12,7 @@
     gnome-tweaks
     gnome-extension-manager
     ffmpeg
+    gtop
   ];
 
   programs.xwayland.enable = true;
