@@ -9,7 +9,7 @@
     inlayHints = true;
     servers = {
       lua_ls.enable = true;
-
+      wgsl_analyzer.enable = true;
       nixd = {
         enable = true;
         settings = {
