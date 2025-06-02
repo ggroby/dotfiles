@@ -16,6 +16,7 @@
     nixvim-package
     tracy
     godot_4
+    openssl.dev
   ];
 
   programs.nix-ld.enable = true;
