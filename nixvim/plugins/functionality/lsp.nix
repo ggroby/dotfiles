@@ -31,6 +31,7 @@
             };
           };
         };
+        nushell.enable = true;
       };
     };
   };
