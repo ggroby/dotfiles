@@ -28,6 +28,7 @@
           stable.rust-analyzer
           stable.rustfmt
           targets.x86_64-unknown-linux-gnu.stable.rust-std
+          targets.wasm32-unknown-unknown.stable.rust-std
         ])
     ];
   in {
@@ -39,7 +40,13 @@
         udev
         libxkbcommon
         wayland.dev
+        openssl.dev
       ];
+
+      shellHook = ''
+        nu --env-config "~/dotfiles/shells/env.nu"
+        exit
+      '';
 
       LD_LIBRARY_PATH = with pkgs;
         lib.makeLibraryPath [
