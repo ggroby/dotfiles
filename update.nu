@@ -20,12 +20,18 @@ def print_segment [message] {
 
 print_segment "update nixvim"
 sudo nix flake update --flake ~/dotfiles/nixvim/
+git add .
+git commit -m "updated nixvim flake."
 
 print_segment "update flake"
 sudo nix flake update --flake ~/dotfiles/flake/
+git add .
+git commit -m "updated system falke."
 
 print_segment "rebuilding system"
 sudo nixos-rebuild switch --flake ~/dotfiles/flake/ 
+git add .
+git commit -m "rebuild system."
 
 mut output = $'($start_date - (date now))'
 $output = ($output | str replace '-' '')
