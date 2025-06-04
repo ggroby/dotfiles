@@ -24,6 +24,7 @@
     qemu
     quickemu
     quickgui
+    gnome-boxes
   ];
 
   systemd.tmpfiles.rules = ["L+ /var/lib/qemu/firmware - - - - ${pkgs.qemu}/share/qemu/firmware"];
