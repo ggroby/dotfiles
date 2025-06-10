@@ -9,7 +9,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     stylix = {
-      url = "github:danth/stylix/nixos-25.05";
+      url = "github:nix-community/stylix/nixos-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixvim-config.url = "path:/home/ggroby/dotfiles/nixvim";
