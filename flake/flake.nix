@@ -54,7 +54,7 @@
         ./virtualisation
         ./bib.nix
         home-manager.nixosModules.default
-        stylix.nixosModules.stylix
+        inputs.stylix.nixosModules.stylix
       ];
     };
   };
