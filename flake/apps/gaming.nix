@@ -13,6 +13,7 @@
     dwarf-fortress
     gpu-screen-recorder
     gpu-screen-recorder-gtk
+    airshipper
   ];
 
   programs.steam = {

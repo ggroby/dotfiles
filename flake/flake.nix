@@ -8,6 +8,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    stylix = {
+      url = "github:danth/stylix/nixos-25.05";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixvim-config.url = "path:/home/ggroby/dotfiles/nixvim";
   };
 
@@ -16,6 +20,7 @@
     nixpkgs,
     unstable-nixpkgs,
     home-manager,
+    stylix,
     nixvim-config,
   } @ inputs: let
     pkgs = import nixpkgs {
@@ -49,6 +54,7 @@
         ./virtualisation
         ./bib.nix
         home-manager.nixosModules.default
+        stylix.nixosModules.stylix
       ];
     };
   };

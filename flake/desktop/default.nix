@@ -1,8 +1,9 @@
 {...}: {
   imports = [
     ./desktop-environment.nix
-    ./users.nix
-    ./localization.nix
     ./fonts.nix
+    ./localization.nix
+    ./theme.nix
+    ./users.nix
   ];
 }

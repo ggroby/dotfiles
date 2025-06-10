@@ -39,6 +39,7 @@
         alsa-lib
         udev
         libxkbcommon
+        cargo-sweep
         wayland.dev
         openssl.dev
       ];

@@ -27,6 +27,8 @@
     gnome-boxes
   ];
 
+  services.spice-webdavd.enable = true;
+
   systemd.tmpfiles.rules = ["L+ /var/lib/qemu/firmware - - - - ${pkgs.qemu}/share/qemu/firmware"];
 
   #virtualisation.virtualbox = {
