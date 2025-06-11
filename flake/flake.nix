@@ -1,5 +1,5 @@
 {
-  description = "System Nixflake";
+  description = "System configuration";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.05";
