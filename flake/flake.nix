@@ -22,6 +22,7 @@
     home-manager,
     stylix,
     nixvim-config,
+    ...
   } @ inputs: let
     pkgs = import nixpkgs {
       system = "x86_64-linux";
@@ -40,21 +41,29 @@
     nixvim-package = nixvim-config.packages.x86_64-linux.default;
   in {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+
       specialArgs = {
-        inherit pkgs;
         inherit inputs;
+        inherit pkgs;
         inherit unstable-pkgs;
         inherit nixvim-package;
       };
+
       modules = [
+        inputs.stylix.nixosModules.stylix
+        home-manager.nixosModules.home-manager
+        {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.ggroby = ./home.ix;
+        }
         ./configuration.nix
         ./apps
         ./desktop
         ./hardware
         ./virtualisation
         ./bib.nix
-        home-manager.nixosModules.default
-        inputs.stylix.nixosModules.stylix
       ];
     };
   };

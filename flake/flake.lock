@@ -330,11 +330,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1749523198,
-        "narHash": "sha256-How2kQw0psKmCdXgojc95Sf3K5maHB3qfINxTZFCAPM=",
+        "lastModified": 1749558678,
+        "narHash": "sha256-DUVAe8E2X2QM0dAnTGlTiqemMqUMMyIeCH7UeNo0g64=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "cdc68935eba9f86d155585fdf6f17af6824f38ac",
+        "rev": "a12f3a99614894502e73eb816e9e076b0ab05730",
         "type": "github"
       },
       "original": {
@@ -404,8 +404,8 @@
         "tree-sitter-rstml": "tree-sitter-rstml"
       },
       "locked": {
-        "lastModified": 1749588374,
-        "narHash": "sha256-AffarpPwNyhZA6wstoZD9VvHx897E8MbXp194AE10GA=",
+        "lastModified": 1749620431,
+        "narHash": "sha256-mWcMCSJXHDswkUVQMKd/XeeOqsbMC4Z5aEVoCs/5VRM=",
         "path": "/home/ggroby/dotfiles/nixvim",
         "type": "path"
       },
