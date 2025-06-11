@@ -1,7 +1,6 @@
 {pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     nushell
-    kitty
     helix
     ranger
     wget
@@ -12,6 +11,7 @@
     spotify-player
     presenterm
     bacon
+    pass
   ];
 
   users.defaultUserShell = pkgs.nushell;

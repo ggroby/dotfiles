@@ -14,5 +14,5 @@
     unstable-pkgs.shotcut
   ];
 
-  programs.firefox.enable = true;
+  #programs.firefox.enable = true;
 }
