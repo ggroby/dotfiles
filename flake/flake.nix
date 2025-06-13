@@ -17,25 +17,17 @@
   };
 
   outputs = {
-    self,
     nixpkgs,
     unstable-nixpkgs,
     ...
   } @ inputs: let
-    pkgs = import nixpkgs {
-      system = "x86_64-linux";
-      config = {
-        allowUnfree = true;
-        nvidia.acceptLicense = true;
-      };
-    };
     unstable-pkgs = import unstable-nixpkgs {
       system = "x86_64-linux";
       config = {
         allowUnfree = true;
-        nvidia.acceptLicense = true;
       };
     };
+
     nixvim-package = inputs.nixvim.packages.x86_64-linux.default;
     #nvf-package = inputs.nvf.packages.x86_64-linux.default;
   in {
@@ -44,11 +36,17 @@
 
       specialArgs = {
         inherit inputs;
-        inherit pkgs;
         inherit unstable-pkgs;
       };
 
       modules = [
+        {
+          nixpkgs.config.allowUnfree = true;
+
+          environment.systemPackages = [
+            nixvim-package
+          ];
+        }
         inputs.stylix.nixosModules.stylix
         inputs.home-manager.nixosModules.home-manager
         {
@@ -59,11 +57,7 @@
             users.ggroby = ./home.nix;
           };
         }
-        {
-          environment.systemPackages = [
-            nixvim-package
-          ];
-        }
+
         ./configuration.nix
         ./apps
         ./desktop
