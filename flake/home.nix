@@ -18,6 +18,7 @@
 
   programs = {
     firefox.enable = true;
+
     kitty = {
       enable = true;
       font.name = lib.mkForce "inter";

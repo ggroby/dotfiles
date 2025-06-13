@@ -1,7 +1,6 @@
 {
   pkgs,
   unstable-pkgs,
-  nixvim-package,
   ...
 }: {
   environment.systemPackages = with pkgs; [
@@ -13,7 +12,6 @@
     leptosfmt
     cargo-leptos
     unstable-pkgs.wgsl-analyzer
-    nixvim-package
     tracy
     godot_4
   ];

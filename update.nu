@@ -21,6 +21,9 @@ def print_segment [message] {
 print_segment "update nixvim"
 sudo nix flake update --flake ~/dotfiles/nixvim/
 
+print_segment "update nvf"
+sudo nix flake update --flake ~/dotfiles/nvf/
+
 print_segment "update flake"
 sudo nix flake update --flake ~/dotfiles/flake/
 

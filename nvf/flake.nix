@@ -4,34 +4,41 @@
     nvf.url = "github:notashelf/nvf";
   };
 
-  outputs = {nixpkgs, ...} @ inputs: {
-    packages.x86_64-linux = {
-      # Set the default package to the wrapped instance of Neovim.
-      # This will allow running your Neovim configuration with
-      # `nix run` and in addition, sharing your configuration with
-      # other users in case your repository is public.
-      default =
-        (inputs.nvf.lib.neovimConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          modules = [
-            import
-            ./theming.nix
-            {
+  outputs = {
+    nixpkgs,
+    nvf,
+    self,
+    ...
+  }: {
+    # This will make the package available as a flake output under 'packages'
+    packages.x86_64-linux.default =
+      (nvf.lib.neovimConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        modules = [
+          # Or move this to a separate file and add it's path here instead
+          # IE: ./nvf_module.nix
+          (
+            {pkgs, ...}: {
+              # Add any custom options (and do feel free to upstream them!)
+              # options = { ... };
               config.vim = {
-                # Enable custom theming options
                 theme.enable = true;
+                # and more options as you see fit...
 
-                # Enable Treesitter
-                treesitter.enable = true;
-
-                # Other options will go here. Refer to the config
-                # reference in Appendix B of the nvf manual.
-                # ...
+                languages = {
+            enableFormat = true;
+            enableTreesitter = true;
+            enableExtraDiagnostics = true;
+                        rust.enable = true;
+                        nix.enable = true;
+                        html.enable = true;
+                        markdown.enable = true;
+                        };
               };
             }
-          ];
-        })
-        .neovim;
-    };
+          )
+        ];
+      })
+      .neovim;
   };
 }

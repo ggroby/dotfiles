@@ -12,16 +12,14 @@
       url = "github:nix-community/stylix/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixvim-config.url = "path:/home/ggroby/dotfiles/nixvim";
+    nixvim.url = "path:/home/ggroby/dotfiles/nixvim";
+    nvf.url = "path:/home/ggroby/dotfiles/nvf";
   };
 
   outputs = {
     self,
     nixpkgs,
     unstable-nixpkgs,
-    home-manager,
-    stylix,
-    nixvim-config,
     ...
   } @ inputs: let
     pkgs = import nixpkgs {
@@ -38,7 +36,8 @@
         nvidia.acceptLicense = true;
       };
     };
-    nixvim-package = nixvim-config.packages.x86_64-linux.default;
+    nixvim-package = inputs.nixvim.packages.x86_64-linux.default;
+    #nvf-package = inputs.nvf.packages.x86_64-linux.default;
   in {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -47,17 +46,23 @@
         inherit inputs;
         inherit pkgs;
         inherit unstable-pkgs;
-        inherit nixvim-package;
       };
 
       modules = [
         inputs.stylix.nixosModules.stylix
-        home-manager.nixosModules.home-manager
+        inputs.home-manager.nixosModules.home-manager
         {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-          home-manager.backupFileExtension = "backup";
-          home-manager.users.ggroby = ./home.nix;
+          home-manager = {
+            useGlobalPkgs = true;
+            useUserPackages = true;
+            backupFileExtension = "backup";
+            users.ggroby = ./home.nix;
+          };
+        }
+        {
+          environment.systemPackages = [
+            nixvim-package
+          ];
         }
         ./configuration.nix
         ./apps
