@@ -13,7 +13,7 @@
     gnome-extension-manager
     ffmpeg
     gtop
-    libgtop
+    libgtop.dev
   ];
 
   programs.xwayland.enable = true;
