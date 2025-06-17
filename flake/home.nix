@@ -1,6 +1,5 @@
 {
   lib,
-  config,
   pkgs,
   ...
 }: {
@@ -15,19 +14,6 @@
     gnomeExtensions.remove-world-clocks
     gnomeExtensions.freon
   ];
-
-  programs = {
-    firefox.enable = true;
-
-    kitty = {
-      enable = true;
-      font.name = lib.mkForce "inter";
-      font.size = lib.mkForce 18;
-    };
-  };
-
-  home.stateVersion = "25.05";
-  programs.home-manager.enable = true;
 
   dconf.settings = {
     "org/gnome/shell" = {
@@ -44,4 +30,17 @@
       ];
     };
   };
+
+  programs = {
+    firefox.enable = true;
+
+    kitty = {
+      enable = true;
+      font.name = lib.mkForce "inter";
+      font.size = lib.mkForce 18;
+    };
+  };
+
+  home.stateVersion = "25.05";
+  programs.home-manager.enable = true;
 }

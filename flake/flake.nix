@@ -27,9 +27,6 @@
         allowUnfree = true;
       };
     };
-
-    nixvim-package = inputs.nixvim.packages.x86_64-linux.default;
-    #nvf-package = inputs.nvf.packages.x86_64-linux.default;
   in {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
@@ -44,12 +41,9 @@
           nixpkgs.config.allowUnfree = true;
 
           environment.systemPackages = [
-            nixvim-package
+            inputs.nixvim.packages.x86_64-linux.default
           ];
-        }
-        inputs.stylix.nixosModules.stylix
-        inputs.home-manager.nixosModules.home-manager
-        {
+
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
@@ -57,6 +51,9 @@
             users.ggroby = ./home.nix;
           };
         }
+
+        inputs.stylix.nixosModules.stylix
+        inputs.home-manager.nixosModules.home-manager
 
         ./configuration.nix
         ./apps
