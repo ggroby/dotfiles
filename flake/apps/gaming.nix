@@ -8,18 +8,23 @@
     unstable-pkgs.heroic
     protonup
     prismlauncher
-    gamemode
     mangohud
     dwarf-fortress
     gpu-screen-recorder
     gpu-screen-recorder-gtk
     airshipper
+    wine
   ];
 
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true;
-    dedicatedServer.openFirewall = true;
-    localNetworkGameTransfers.openFirewall = true;
+  programs = {
+    steam = {
+      enable = true;
+      remotePlay.openFirewall = true;
+      dedicatedServer.openFirewall = true;
+      localNetworkGameTransfers.openFirewall = true;
+      protontricks.enable = true;
+    };
+
+    gamemode.enable = true;
   };
 }

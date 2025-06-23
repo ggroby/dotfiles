@@ -13,7 +13,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixvim.url = "path:/home/ggroby/dotfiles/nixvim";
-    nvf.url = "path:/home/ggroby/dotfiles/nvf";
   };
 
   outputs = {
