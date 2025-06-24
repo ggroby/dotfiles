@@ -3,6 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    android-nixpkgs = {
+      url = "github:tadfisher/android-nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     flake-utils.url = "github:numtide/flake-utils";
     fenix.url = "github:nix-community/fenix";
     fenix.inputs.nixpkgs.follows = "nixpkgs";
@@ -11,6 +15,7 @@
   outputs = {
     self,
     nixpkgs,
+    android-nixpkgs,
     flake-utils,
     fenix,
   } @ inputs: let
@@ -21,28 +26,41 @@
     };
   in {
     devShells.x86_64-linux.default = let
+      /*
       android_sdk =
-        (pkgs.androidenv.composeAndroidPackages {
-          toolsVersion = "26.1.1";
-          platformToolsVersion = "35.0.2";
-          buildToolsVersions = ["34.0.0" "35.0.1"];
-          includeEmulator = true;
-          emulatorVersion = "35.5.2";
-          platformVersions = ["34" "35"];
-          includeSources = false;
-          includeSystemImages = true;
-          systemImageTypes = ["google_apis" "google_apis_playstore"];
-          abiVersions = ["x86" "x86_64"]; #"armeabi-v7a" "arm64-v8a"];
-          cmakeVersions = ["3.31.5"];
-          includeNDK = true;
-          ndkVersions = ["27.0.12077973"];
-          useGoogleAPIs = false;
-          useGoogleTVAddOns = false;
-          includeExtras = [
-            "extras;google;gcm"
-          ];
-        })
-        .androidsdk;
+      (pkgs.androidenv.composeAndroidPackages {
+        toolsVersion = "26.1.1";
+        platformToolsVersion = "35.0.2";
+        buildToolsVersions = ["34.0.0" "35.0.1"];
+        includeEmulator = true;
+        emulatorVersion = "35.5.2";
+        platformVersions = ["34" "35"];
+        includeSources = false;
+        includeSystemImages = true;
+        systemImageTypes = ["google_apis" "google_apis_playstore"];
+        abiVersions = ["x86" "x86_64"]; #"armeabi-v7a" "arm64-v8a"];
+        cmakeVersions = ["3.31.5"];
+        includeNDK = true;
+        ndkVersions = ["27.0.12077973"];
+        useGoogleAPIs = true;
+        useGoogleTVAddOns = false;
+        includeExtras = [
+          "extras;google;gcm"
+        ];
+      })
+      .androidsdk;
+      */
+      android_sdk = android-nixpkgs.sdk.x86_64-linux (sdkPkgs:
+        with sdkPkgs; [
+          cmdline-tools-latest
+          build-tools-34-0-0
+          platform-tools
+          platforms-android-34
+          sources-android-34
+          emulator
+          ndk-27-2-12479018
+          system-images-android-34-google-apis-x86-64
+        ]);
 
       packages = with pkgs; [
         curl
@@ -110,9 +128,9 @@
 
         LD_LIBRARY_PATH = "${pkgs.lib.makeLibraryPath libraries}:$LD_LIBRARY_PATH";
         XDG_DATA_DIRS = "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}:${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}:$XDG_DATA_DIRS";
-        ANDROID_HOME = "${android_sdk}/libexec/android-sdk";
-        NDK_HOME = "${android_sdk}/libexec/android-sdk/ndk/27.0.12077973";
-        GRADLE_OPTS = "-Dorg.gradle.project.android.aapt2FromMavenOverride=${android_sdk}/libexec/android-sdk/build-tools/35.0.1/aapt2";
+        #ANDROID_HOME = "${android_sdk}/libexec/android-sdk";
+        NDK_HOME = "${android_sdk}/share/android-sdk/ndk/27.2.12479018";
+        #GRADLE_OPTS = "-Dorg.gradle.project.android.aapt2FromMavenOverride=${android_sdk}/libexec/android-sdk/build-tools/35.0.1/aapt2";
         WEBKIT_DISABLE_DMABUF_RENDERER = 1;
       };
   };
