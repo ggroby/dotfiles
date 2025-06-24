@@ -8,5 +8,6 @@
     ./messangers.nix
     ./programming.nix
     ./terminal.nix
+    ./virtualisation.nix
   ];
 }

@@ -11,7 +11,6 @@
     jetbrains.rider
     unstable-pkgs.dbeaver-bin
     teams-for-linux
-    wireshark
   ];
 
   programs.wireshark.enable = true;

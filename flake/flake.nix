@@ -58,7 +58,6 @@
         ./apps
         ./desktop
         ./hardware
-        ./virtualisation
         ./bib.nix
       ];
     };

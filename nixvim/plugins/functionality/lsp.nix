@@ -25,12 +25,12 @@
             formatting.enable = true;
             formatting.command = ["alejandra"];
             options = {
-              system = {
-                expr = "(builtins.getFlake \"/home/ggroby/flake/flake.nix\").nixosConfigurations.nixos.options";
-              };
+              nixos.expr = "(builtins.getFlake \"/home/ggroby/dotfiles/flake\").nixosConfigurations.nixos.options";
+              nixvim.expr = "(builtins.getFlake \"/home/ggroby/dotfiles/nixvim\").packages.x86_64-linux.default.options";
             };
           };
         };
+
         nushell.enable = true;
       };
     };
